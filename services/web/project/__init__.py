@@ -14,9 +14,12 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_object("project.config.Config")
 
-@app.route("/calc", methods=["POST"])
-def calc():
-    return jsonify(hello="world")
+server_host = "http://213.219.213.136"
+
+@app.route("/calc/<line>", methods=["POST"])
+def calc(line):
+    result_line = line[::-1]
+    return jsonify(line=result_line), 200
 
 @app.route("/files/<filename>")
 def get_file(filename):
@@ -31,7 +34,7 @@ def upload_file():
         return jsonify(message="Could not get file nme from request"), 500
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config["FILES_FOLDER"], filename))
-    return Response(status=200)
+    return jsonify(url=f"{server_host}/files/{filename}"), 200
 
 # json = {
 #     "id": 1,

@@ -18,8 +18,8 @@ services:
       - 5000
     env_file:
       - ./.env.dev
-#  front:
+#  frontik:
 #    image: mhuanteraxe/ded-script
-#    container_name: front
+#    container_name: frontik
 #    ports:
 #      - 3000
