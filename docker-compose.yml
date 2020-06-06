@@ -1,0 +1,13 @@
+version: '3'
+services:
+  japronto:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    hostname: japronto
+    container_name: japronto
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - .:/app
