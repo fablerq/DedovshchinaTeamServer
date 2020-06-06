@@ -4,3 +4,4 @@ Endpoints:
 
 - /calc
 - /calc/csv
+- /files/<filename>
