@@ -1,6 +1,7 @@
 import os
 
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 from flask import (
     Flask,
     jsonify,
@@ -10,6 +11,7 @@ from flask import (
 )
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object("project.config.Config")
 
 @app.route("/calc", methods=["POST"])
@@ -23,6 +25,8 @@ def get_file(filename):
 @app.route("/calc/csv", methods=["POST"])
 def upload_file():
     file = request.files["file"]
+    if file.filename == '':
+        return jsonify(message="Could not get file from request"), 500
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config["FILES_FOLDER"], filename))
     return Response(status=200)
