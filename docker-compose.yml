@@ -1,13 +1,25 @@
-version: '3'
+version: '3.7'
+
 services:
-  japronto:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    hostname: japronto
-    container_name: japronto
+  nginx:
+    build: ./services/nginx
     ports:
-      - 8080:8080
-    tty: true
+      - 1337:80
+    depends_on:
+      - web
+  web:
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:5000 manage:app
     volumes:
-      - .:/app
+      - ./services/web/:/usr/src/app/
+    ports:
+      - 5000
+    env_file:
+      - ./.env.dev
+#  front:
+#    image: mhuanteraxe/ded-script
+#    container_name: front
+#    ports:
+#      - 5050

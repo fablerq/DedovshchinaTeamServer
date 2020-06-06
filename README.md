@@ -1,5 +1,6 @@
-### Server for Dedovshchina Team on 'Цифровой Прорыв' hackathon
+### Server for 'Дедовщина' Team on 'Цифровой Прорыв' hackathon
 
 Endpoints:
 
-- /hello
+- /calc
+- /calc/csv
