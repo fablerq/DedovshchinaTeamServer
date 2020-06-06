@@ -32,27 +32,18 @@ def get_file(filename):
 def upload_file():
     if request.files.get('file', None) is None:
         return jsonify(message="Could not get file field from request"), 400
+
     file = request.files["file"]
+
     if file.filename == '':
         return jsonify(message="Could not get file nme from request"), 400
+
     filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config["FILES_FOLDER"], filename))
-    return jsonify(url=f"{server_host}/files/{filename}"), 200
 
-# json = {
-#     "id": 1,
-#     "initial": "str",
-#     "level": "str",
-#     "country": "str",
-#     "region": "str",
-#     "city": "city",
-#     "place": "place",
-#     "area_type": "str",
-#     "area": "str",
-#     "street_type": "str",
-#     "house": "str",
-#     "building": "str",
-#     "flat": "str",
-#     "office": "str"
-# },
-
+    with open(f"{app.config['FILES_FOLDER']}/{filename}", "bw") as f:
+        chunk_size = 4096
+        while True:
+            chunk = file.stream.read(chunk_size)
+            if len(chunk) == 0:
+                return jsonify(url=f"{server_host}/files/{filename}"), 200
+            f.write(chunk)
