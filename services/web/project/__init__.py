@@ -16,8 +16,11 @@ app.config.from_object("project.config.Config")
 
 server_host = "http://213.219.213.136"
 
-@app.route("/calc/<line>", methods=["POST"])
-def calc(line):
+@app.route("/calc", methods=["POST"])
+def calc():
+    line = request.args.get('data', None)
+    if line is None:
+        return jsonify(message="Could not get file field from request"), 400
     result_line = line[::-1]
     return jsonify(line=result_line), 200
 
@@ -28,10 +31,10 @@ def get_file(filename):
 @app.route("/calc/csv", methods=["POST"])
 def upload_file():
     if request.files.get('file', None) is None:
-        return jsonify(message="Could not get file field from request"), 500
+        return jsonify(message="Could not get file field from request"), 400
     file = request.files["file"]
     if file.filename == '':
-        return jsonify(message="Could not get file nme from request"), 500
+        return jsonify(message="Could not get file nme from request"), 400
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config["FILES_FOLDER"], filename))
     return jsonify(url=f"{server_host}/files/{filename}"), 200
