@@ -24,9 +24,11 @@ def get_file(filename):
 
 @app.route("/calc/csv", methods=["POST"])
 def upload_file():
+    if request.files.get('file', None) is None:
+        return jsonify(message="Could not get file field from request"), 500
     file = request.files["file"]
     if file.filename == '':
-        return jsonify(message="Could not get file from request"), 500
+        return jsonify(message="Could not get file nme from request"), 500
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config["FILES_FOLDER"], filename))
     return Response(status=200)
