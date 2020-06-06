@@ -16,7 +16,7 @@ app.config.from_object("project.config.Config")
 
 server_host = "http://213.219.213.136"
 
-@app.route("/calc", methods=["POST"])
+@app.route("/calc")
 def calc():
     line = request.args.get('data', None)
     if line is None:
