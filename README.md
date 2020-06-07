@@ -6,10 +6,9 @@ Endpoints:
 - POST /calc/csv - get url for csv file with normalized addresses from source file
 - GET /files?data=filename - get calculated csv file by name
 
-GET calc?data=<filename>
+GET calc?data=<linewithtext>
 
 ![Alt text](imgs/calc.png?raw=true "calc")
-
 
 ##### Имплементировано в пакете, но следующие два метода пока не используют пакетные методы, а содана временная функциональность в виде зарузки/отдачи файлов
 
