@@ -36,7 +36,7 @@ def upload_file():
     file = request.files["file"]
 
     if file.filename == '':
-        return jsonify(message="Could not get file nme from request"), 400
+        return jsonify(message="Could not get file name from request"), 400
 
     filename = secure_filename(file.filename)
 
