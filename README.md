@@ -2,9 +2,9 @@
 
 Endpoints:
 
-- GET /calc - get normalized address for single string 
+- GET /calc?data=<linewithtext> - get normalized address for single string 
 - POST /calc/csv - get url for csv file with normalized addresses from source file
-- GET /files?data=filename - get calculated csv file by name
+- GET /files/<filename> - get calculated csv file by name
 
 GET calc?data=<linewithtext>
 
