@@ -10,6 +10,9 @@ GET calc?data=<filename>
 
 ![Alt text](imgs/calc.png?raw=true "calc")
 
+
+##### Имплементировано в пакете, но следующие два метода пока не используют пакетные метода, а стоят заглушки в виде зарузки/отдачи csv файлов
+
 POST calc/csv/
 
 ![Alt text](imgs/calc-csv.png?raw=true "calc/csv")

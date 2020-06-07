@@ -2,6 +2,9 @@ import os
 
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+
+from models.Address import Address
+
 from flask import (
     Flask,
     jsonify,
@@ -21,7 +24,8 @@ def calc():
     line = request.args.get('data', None)
     if line is None:
         return jsonify(message="Could not get file field from request"), 400
-    result_line = line[::-1]
+    addr = Address(line)
+    result_line = addr.address_string()
     return jsonify(line=result_line), 200
 
 @app.route("/files/<filename>")
