@@ -2,4 +2,4 @@ Flask==1.1.1
 gunicorn==20.0.4
 psycopg2-binary==2.8.4
 flask-cors==1.10.3
-lod-dedovschina-sber==1.0.2
+lod-dedovschina-sber==1.0.4
